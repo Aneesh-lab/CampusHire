@@ -1,5 +1,6 @@
 package com.campushire.campushire.controller;
 
+import java.io.FileReader;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -16,6 +17,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.campushire.campushire.entity.Admin;
+
 @RestController 
 @RequestMapping("/api/admins")
 public class AdminController {
@@ -29,6 +32,10 @@ public class AdminController {
             return ResponseEntity.badRequest().body(Map.of(
                     "success", false, "message", "Email already exists"));
         }
+
+          FileReader file = new FileReader("data.txt");
+            file.close();
+            
         Admin createdAdmin = adminService.createAdmin(admin);
         return ResponseEntity.ok(createdAdmin);
     }
